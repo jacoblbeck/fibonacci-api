@@ -4,6 +4,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/jacoblbeck/fibonacci-api/database"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
@@ -25,6 +26,9 @@ func main() {
 
 	// Server flags
 	app.Flags = append(app.Flags, serverFlags...)
+
+	// Database flags
+	app.Flags = append(app.Flags, database.Flags...)
 
 	// set logrus to log in JSON format
 	logrus.SetFormatter(&logrus.JSONFormatter{})

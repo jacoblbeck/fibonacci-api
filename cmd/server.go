@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/jacoblbeck/fibonacci-api/database"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 	"gopkg.in/tomb.v2"
@@ -15,10 +16,10 @@ import (
 // Server represents the information that can be provided
 // to run a Marina server.
 type server struct {
-	Addr string
-	//Database *database.Setup
-	Port   string
-	Router *mux.Router
+	Addr     string
+	Database *database.Setup
+	Port     string
+	Router   *mux.Router
 }
 
 // serverFlags represents the settings that can be passed from the cli.
@@ -46,13 +47,13 @@ var serverFlags = []cli.Flag{
 // all the required dependencies for the server
 func (s *server) configure() error {
 	// create a new database configuration
-	// database, err := database.New(s.Database)
-	// if err != nil {
-	// 	return err
-	// }
+	database, err := database.New(s.Database)
+	if err != nil {
+		return err
+	}
 
 	// overwrite the router with the required middleware
-	s.Router = router()
+	s.Router = router(database.Middleware)
 
 	return nil
 }
