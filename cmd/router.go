@@ -15,6 +15,8 @@ func router(options ...mux.MiddlewareFunc) *mux.Router {
 	router.HandleFunc("/api/v1/fibonacci/current", api.GetCurrent).Methods("GET")
 	router.HandleFunc("/api/v1/fibonacci/previous", api.GetPrevious).Methods("GET")
 
+	router.HandleFunc("/api/v1/fibonacci/reset", api.ResetSequence).Methods("GET")
+
 	router.HandleFunc("/health", api.Health).Methods("GET")
 
 	return router

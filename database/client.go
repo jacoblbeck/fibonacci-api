@@ -1,7 +1,10 @@
 package database
 
 import (
+	"time"
+
 	"github.com/jacoblbeck/fibonacci-api/types"
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -20,10 +23,19 @@ type Client struct {
 // integrates with a supported database instance.
 func New(s *Setup) (*Client, error) {
 	// create the database client
+	retries := 0
 
 	db, err := gorm.Open(postgres.Open(s.Config), &gorm.Config{})
-	if err != nil {
-		return nil, err
+
+	//retry for database connection if server starts before db is ready
+	for err != nil {
+		if retries < 2 {
+			retries++
+			time.Sleep(5 * time.Second)
+			db, err = gorm.Open(postgres.Open(s.Config), &gorm.Config{})
+			continue
+		}
+		logrus.Error(err)
 	}
 
 	err = db.AutoMigrate(types.Fibonacci{})
