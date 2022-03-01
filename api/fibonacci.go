@@ -9,7 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-//GetNext is the api function to get the next value in the fibonacci sequence
+//GetNext is the api function to get the next value in the fibonacci sequence.
 func GetNext(w http.ResponseWriter, r *http.Request) {
 	logrus.Info("getting next")
 
@@ -52,7 +52,7 @@ func GetNext(w http.ResponseWriter, r *http.Request) {
 
 }
 
-//GetCurrent is the api function to get the current value of the fibonacci sequence
+//GetCurrent is the api function to get the current value of the fibonacci sequence.
 func GetCurrent(w http.ResponseWriter, r *http.Request) {
 	logrus.Info("getting current")
 
@@ -71,7 +71,7 @@ func GetCurrent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//GetPrevious is the api function to get the previous value of the fibonacci sequence
+//GetPrevious is the api function to get the previous value of the fibonacci sequence.
 func GetPrevious(w http.ResponseWriter, r *http.Request) {
 	logrus.Info("getting previous")
 
@@ -88,4 +88,22 @@ func GetPrevious(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logrus.Error(err)
 	}
+}
+
+//ResetSequence sets the sequence back to 0.
+func ResetSequence(w http.ResponseWriter, r *http.Request) {
+	logrus.Info("resetting sequence")
+
+	database := context.Get(r, "database").(*database.Client)
+
+	database.Fibonacci.SetCurrent(0)
+	database.Fibonacci.SetPrevious(0)
+
+	w.WriteHeader(http.StatusOK)
+
+	_, err := w.Write([]byte("reset"))
+	if err != nil {
+		logrus.Error(err)
+	}
+
 }

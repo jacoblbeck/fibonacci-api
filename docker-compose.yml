@@ -5,13 +5,17 @@ services:
       context: .
     container_name: server
     image: server:local
+    deploy:
+      resources:
+          limits:
+            cpus: '1'
+            memory: 512MB
     networks:
       - fibonacci-api
     ports:
       - "8080:8080"
     depends_on:
       - postgres
-    restart: always
     environment:
       SERVER_ADDR: http://localhost:8080
       SERVER_PORT: ":8080"
@@ -21,7 +25,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:14.2
+    image: postgres:14.2-alpine
     networks:
       - fibonacci-api
     environment:
