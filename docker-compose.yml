@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  server:
+    build:
+      context: .
+    container_name: server
+    image: server:local
+    # networks:
+    #   - fibonacci-api
+    ports:
+      - "8080:8080"
+    # depends_on:
+    #   - postgres
+    # restart: always
+    environment:
+      SERVER_ADDR: http://localhost:8080
+      SERVER_PORT: ":8080"
+      LOG_LEVEL: trace
+
+  # postgres:
+  #   container_name: postgres
+  #   image: postgres:14.2
+  #   networks:
+  #     - fibonacci-api
+  #   environment:
+  #     POSTGRES_USER: fibonacci-api
+  #     POSTGRES_DB: fibonacci-api
+  #     POSTGRES_PASSWORD: fibonacci-api
+  #     PGGSSENCMODE: disable
+  #   ports:
+  #     - "5432:5432"
+
+# networks:
+#   fibonacci-api:
