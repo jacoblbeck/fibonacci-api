@@ -11,4 +11,5 @@ The endpoints available are:
  ```
 
  ***Note***
+ 
  The server can take up to 10 seconds to start upon first setup as it has to wait for the database to be ready, there is a retry mechanism built in. Once the Postgres container is able to take connections the server can restart and be ready almost immeditely.
