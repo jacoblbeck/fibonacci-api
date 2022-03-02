@@ -1,6 +1,6 @@
 # fibonacci-api
 
-To run the server clone this repo and run `make up` from the base of the file. This will create the Go binary and run the docker compose commands to run the server and postgres database.
+To run the server clone this repo and run `make up` from the base of the repo. This will create the Go binary and run the docker compose commands to run the server and postgres database.
 
 The endpoints available are:
 ```/health -> reutrns health of the server
