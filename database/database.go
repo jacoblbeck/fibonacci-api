@@ -8,7 +8,7 @@ import (
 // with the different supported Database backends.
 type Service interface {
 	// Middleware defines a function that
-	// adds a registry client to the middleware
+	// adds a database client to the middleware
 	Middleware(http.Handler) http.Handler
 
 	GetCurrent() int

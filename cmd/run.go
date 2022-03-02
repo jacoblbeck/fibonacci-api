@@ -6,6 +6,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//run initializes the applications
 func run(c *cli.Context) error {
 	// set log level for logrus
 	switch c.String("log.level") {
