@@ -5,7 +5,7 @@ import (
 	"github.com/jacoblbeck/fibonacci-api/api"
 )
 
-//router sets the api endpoints for the application and docker registry.
+//router sets the api endpoints for the application.
 func router(options ...mux.MiddlewareFunc) *mux.Router {
 	router := mux.NewRouter()
 
