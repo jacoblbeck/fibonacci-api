@@ -57,17 +57,6 @@ fix:
 	@echo "### Fixing Go Code"
 	@go fix ./...	
 
-# The `gen-auth` is intended to create an htpasswd
-# file that is required for local development.
-#
-# Usage: `make gen-auth`
-.PHONY: gen-auth
-gen-auth:
-	@echo
-	@echo "### Generating htpasswd file"
-	@mkdir .auth
-	@htpasswd -Bbn marina password > .auth/htpasswd
-
 # The `build` target is intended to compile
 # the Go source code into a binary.
 #

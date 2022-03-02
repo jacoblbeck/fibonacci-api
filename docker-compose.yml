@@ -19,13 +19,14 @@ services:
     environment:
       SERVER_ADDR: http://localhost:8080
       SERVER_PORT: ":8080"
-      LOG_LEVEL: trace
+      LOG_LEVEL: info
       DATABASE_CONFIG: host=postgres user=fibonacci-api password=fibonacci-api dbname=fibonacci-api port=5432 sslmode=disable TimeZone=America/Chicago
 
 
   postgres:
     container_name: postgres
-    image: postgres:14.2-alpine
+    image: postgres:14.2
+    command:  postgres -c 'max_connections=250'
     networks:
       - fibonacci-api
     environment:

@@ -14,7 +14,7 @@ import (
 )
 
 // Server represents the information that can be provided
-// to run a Marina server.
+// to run a fibonacci server.
 type server struct {
 	Addr     string
 	Database *database.Setup

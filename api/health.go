@@ -7,7 +7,7 @@ import (
 )
 
 // Health represents the API handler to
-// report the health status for Marina.
+// report the health status for the server.
 func Health(w http.ResponseWriter, r *http.Request) {
 	logrus.Info("checking health")
 

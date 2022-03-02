@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// Service represents the interface for Marina integrating
+// Service represents the interface for fibonacci integrating
 // with the different supported Database backends.
 type Service interface {
 	// Middleware defines a function that
