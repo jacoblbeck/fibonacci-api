@@ -18,6 +18,9 @@ func GetNext(w http.ResponseWriter, r *http.Request) {
 	cur, err := database.Fibonacci.GetCurrent()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+
+		logrus.Error(err)
+		return
 	}
 
 	if cur == 0 {
@@ -31,6 +34,7 @@ func GetNext(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			logrus.Error(err)
 		}
+		return
 	} else {
 		prev, err := database.Fibonacci.GetPrevious()
 		if err != nil {
@@ -44,10 +48,11 @@ func GetNext(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 
-		_, err = w.Write([]byte(strconv.Itoa(next)))
+		_, err = w.Write([]byte(strconv.FormatInt(next, 10)))
 		if err != nil {
 			logrus.Error(err)
 		}
+		return
 	}
 
 }
@@ -65,7 +70,7 @@ func GetCurrent(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	_, err = w.Write([]byte(strconv.Itoa(cur)))
+	_, err = w.Write([]byte(strconv.FormatInt(cur, 10)))
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -84,7 +89,7 @@ func GetPrevious(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	_, err = w.Write([]byte(strconv.Itoa(prev)))
+	_, err = w.Write([]byte(strconv.FormatInt(prev, 10)))
 	if err != nil {
 		logrus.Error(err)
 	}

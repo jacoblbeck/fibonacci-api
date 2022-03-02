@@ -32,7 +32,10 @@ func New(s *Setup) (*Client, error) {
 		if retries < 2 {
 			retries++
 			time.Sleep(5 * time.Second)
-			db, err = gorm.Open(postgres.Open(s.Config), &gorm.Config{})
+			db, err = gorm.Open(postgres.Open(s.Config), &gorm.Config{
+				SkipDefaultTransaction: true,
+				PrepareStmt:            true,
+			})
 			continue
 		}
 		logrus.Error(err)
